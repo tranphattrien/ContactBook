@@ -17,7 +17,19 @@ app.use(cors(corsOptions));
 app.use(express.json());
 // parse requests of content-type - application/x-www-form urlencoded
 app.use(express.urlencoded({extended: true}));
-
+const db = require("./app/models");
+db.mongoose
+    .connect(config.db.url,{
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    .then(() =>{
+        console.log("Connect to the database!");
+    })
+    .catch((err) => {
+        console.log("Cannot connect to the database!", err);
+        process.exit();
+    });
 // simple roule
 app.get("/", (req, res) => {
     res.json({message: "Welcome to contact book application."});
