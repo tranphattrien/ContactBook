@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const config = require("./app/config");
+const setupContactRoutes = require("./app/routes/contact.routes");
 
 const app = express();
 
@@ -24,3 +25,10 @@ const PORT = config.app.port;
 app.listen(PORT, () => {
     console.log(`Server is running on port $(PORT).`);
 })
+
+setupContactRoutes(app);
+// set port, listen for requests
+const PORT = config.app.port;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}.`);
+});
